@@ -17,6 +17,12 @@
 @rem
 
 @if "%DEBUG%"=="" @echo off
+
+@rem Double-clicking the wrapper starts the interactive build.
+@if "%~1"=="" (
+    call "%~dp0build.bat"
+    exit /b
+)
 @rem ##########################################################################
 @rem
 @rem  Gradle startup script for Windows
