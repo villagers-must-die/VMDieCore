@@ -1,0 +1,1 @@
+startup VMDieStacking org.dishanhai.vmdiecore.compat.kubejs.StackingBinding

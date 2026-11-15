@@ -1,0 +1,16 @@
+{
+    "required": true,
+    "minVersion": "0.8.7",
+    "package": "org.dishanhai.vmdiecore.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "mixins": [
+        "ContainerMixin",
+        "InvWrapperMixin",
+        "ItemEntityMixin",
+        "ItemStackMixin",
+        "SlotMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}
