@@ -47,9 +47,17 @@ base {
 // Mojang ships Java 21 to end users in 1.21.1, so mods should target Java 21.
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+sourceSets {
+    gameTest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+
 neoForge {
     // Specify the version of NeoForge to use.
     version = project.neo_version
+    addModdingDependenciesTo sourceSets.gameTest
 
     parchment {
         mappingsVersion = project.parchment_mappings_version
@@ -64,12 +72,17 @@ neoForge {
     runs {
         client {
             client()
+            gameDirectory = file('run-client')
+            if (providers.gradleProperty('clientSmokeTest').isPresent()) {
+                systemProperty 'vmdiecore.clientSmokeTest', 'true'
+            }
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            systemProperty 'neoforge.enabledGameTestNamespaces', "${project.mod_id},monsterperspective"
         }
 
         server {
             server()
+            gameDirectory = file('run-server')
             programArgument '--nogui'
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
@@ -79,7 +92,8 @@ neoForge {
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
             type = "gameTestServer"
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            gameDirectory = file('run-test')
+            systemProperty 'neoforge.enabledGameTestNamespaces', "${project.mod_id},monsterperspective"
         }
 
         data {
@@ -103,7 +117,7 @@ neoForge {
             // Recommended logging level for the console
             // You can set various levels here.
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
-            logLevel = org.slf4j.event.Level.DEBUG
+            logLevel = org.slf4j.event.Level.INFO
         }
     }
 
@@ -113,6 +127,7 @@ neoForge {
         // multi mod projects should define one per mod
         "${mod_id}" {
             sourceSet(sourceSets.main)
+            sourceSet(sourceSets.gameTest)
         }
     }
 }
@@ -123,12 +138,41 @@ neoForge {
 // "optional", meaning it will not be pulled by dependents of this mod.
 configurations {
     runtimeClasspath.extendsFrom localRuntime
+    gameTestImplementation.extendsFrom implementation
+    gameTestCompileOnly.extendsFrom compileOnly
+    gameTestRuntimeOnly.extendsFrom localRuntime
+}
+
+// A checkout inside a modpack can build against the exact installed releases.
+// Otherwise resolve pinned public artifacts; no machine-specific absolute paths are stored.
+def packMods = providers.gradleProperty('packModsDir').map { file(it) }.orNull
+def modArtifact = { String pattern, String coordinate ->
+    if (packMods == null) return coordinate
+    def matches = fileTree(dir: packMods, include: [pattern]).files
+    if (matches.size() != 1) {
+        throw new GradleException("Expected one ${pattern} in ${packMods}, found ${matches.size()}")
+    }
+    return files(matches)
 }
 
 dependencies {
-    implementation "maven.modrinth:anvilcraft:${anvilcraft_version}"
-    implementation "com.lowdragmc.ldlib2:ldlib2-neoforge-${minecraft_version}:${ldlib2_version}:all"
-    implementation "com.lowdragmc.multiblocked2:Multiblocked2-1.21-${minecraft_version}:${mbd2_version}"
+    implementation modArtifact('*anvilcraft-*.jar', "maven.modrinth:anvilcraft:${anvilcraft_version}")
+    implementation modArtifact('ldlib2-*.jar', "com.lowdragmc.ldlib2:ldlib2-neoforge-${minecraft_version}:${ldlib2_version}:all")
+    implementation modArtifact('Multiblocked2-*.jar', "com.lowdragmc.multiblocked2:Multiblocked2-1.21-${minecraft_version}:${mbd2_version}:all")
+
+    def curios = modArtifact('curios-*.jar', "maven.modrinth:curios:${curios_version}")
+    def golems = modArtifact('*modulargolems-*.jar', "maven.modrinth:modular-golems:${modulargolems_version}")
+    def l2 = modArtifact('l2library-*.jar', "maven.modrinth:l2library:${l2library_version}")
+    compileOnly curios
+    compileOnly golems
+    compileOnly l2
+    // Development runs exercise every racial technology; the released mod keeps these optional.
+    localRuntime curios
+    localRuntime golems
+    localRuntime l2
+    if (providers.gradleProperty('integrationModsDir').isPresent()) {
+        localRuntime fileTree(dir: providers.gradleProperty('integrationModsDir').get(), include: ['*.jar'])
+    }
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
@@ -196,6 +240,56 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+tasks.named('jar', Jar).configure {
+    from('licenses') { into 'META-INF/licenses' }
+}
+
+tasks.register('sourcesJar', Jar) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
+    from sourceSets.gameTest.allSource
+    from('licenses') { into 'META-INF/licenses' }
+    dependsOn generateModMetadata
+}
+tasks.named('assemble').configure { dependsOn 'sourcesJar' }
+
+// Some loader failures exit with status 0. Require evidence from this exact run.
+tasks.register('prepareGameTestScripts', Copy) {
+    from 'tools/integration/kubejs'
+    into 'run-test/kubejs'
+}
+tasks.named('prepareGameTestServerRun').configure { dependsOn 'prepareGameTestScripts' }
+
+def gameTestLogFile = layout.projectDirectory.file('run-test/logs/latest.log')
+tasks.matching { it.name == 'runGameTestServer' }.configureEach {
+    doFirst { task -> task.ext.testStartMillis = System.currentTimeMillis() }
+    doLast { task ->
+        def log = gameTestLogFile.asFile
+        if (!log.exists() || log.lastModified() < task.ext.testStartMillis ||
+                !(log.getText('UTF-8') =~ /All \d+ required tests passed/).find()) {
+            throw new GradleException('GameTest did not report a fresh successful run; inspect run-test/logs/latest.log')
+        }
+        if (log.getText('UTF-8').contains('KubeJS Server') &&
+                !log.getText('UTF-8').contains('VMDieCore technology binding queries passed')) {
+            throw new GradleException('KubeJS binding integration did not pass; inspect run-test/logs/latest.log')
+        }
+    }
+}
+
+if (providers.gradleProperty('clientSmokeTest').isPresent()) {
+    def clientSmokeLog = layout.projectDirectory.file('run-client/logs/latest.log')
+    tasks.named('runClient').configure {
+        doFirst { task -> task.ext.smokeStartMillis = System.currentTimeMillis() }
+        doLast { task ->
+            def log = clientSmokeLog.asFile
+            if (!log.exists() || log.lastModified() < task.ext.smokeStartMillis ||
+                    !log.getText('UTF-8').contains('VMDieCore client startup checks passed')) {
+                throw new GradleException('Client startup check did not pass; inspect run-client/logs/latest.log')
+            }
+        }
+    }
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.

@@ -4,15 +4,40 @@ VillagerMustDieCore 是 Villager Must Die 整合包的核心模组。
 
 - 模组 ID：`vmdiecore`
 - Minecraft：1.21.1
-- 模组加载器：NeoForge（开发版本 21.1.265）
+- 模组加载器：NeoForge（开发版本 21.1.266）
 - 开发环境：JDK 21、Gradle Wrapper
-- 必需前置：[铁砧工艺（AnvilCraft）](https://modrinth.com/mod/anvilcraft)，NeoForge 1.21.1 版本，最低 1.5.0；需要独立安装。注意：Modrinth 的 1.5.0 发布包内部 Minecraft 版本范围声明与 1.21.1 不符，尚需确认可用发布包后才能进行运行验证。
+- 必需前置：[铁砧工艺（AnvilCraft）](https://modrinth.com/mod/anvilcraft)，最低 1.5.0；本次构建与运行使用整合包中的 1.6.0+rc.1，需要独立安装。
 
 - 必需前置：[LDLib2](https://github.com/Low-Drag-MC/LDLib2)，最低 2.2.39.a；[Multiblocked2](https://github.com/Low-Drag-MC/Multiblocked2)，最低 21.1.1。两者均需独立安装；KilaGraph 由该版本 MBD2 自带。
+
+- 0.2.0 已整合怪物视角 1.0.2 的五族选择、怪物模型、搜打撤风格身份 UI 和种族科技基础实现。**种族科技尚未完成：配方种族限制仅覆盖原版合成流程，其他模组可绕过。** Curios 9.5.1+、Modular Golems 3.1.44+ 及其 L2Library 前置用于相应科技联动；未安装时对应联动不启用。
 
 ## 构建
 
 Windows 下可双击 `gradlew.bat` 或 `build.bat` 构建，完成后按任意键关闭窗口。也可以在项目根目录运行 `./gradlew build`（Windows 为 `gradlew.bat build`）；生成的 JAR 位于 `build/libs/`。
+
+本仓库克隆在整合包版本目录内时，可以直接采用上级 `mods/` 的依赖版本：
+
+```powershell
+.\gradlew.bat build '-PpackModsDir=../mods'
+.\gradlew.bat runGameTestServer '-PpackModsDir=../mods'
+```
+
+默认构建会下载固定版本的依赖，无需依赖本机绝对路径。开发测试使用隔离的 `run-test/`、`run-client/` 目录，正式 JAR 不包含测试代码或第三方模组 JAR。
+
+## 怪物视角与种族科技
+
+按 **O** 或输入 `/monster` 打开作战身份界面。可选僵尸、骷髅、末影人、节肢生物、血族；血族保留玩家自身模型和皮肤。沿用大字号、军绿/沙色/警戒橙的搜打撤风格 UI。
+
+种族科技包含肉傀儡替身、灵魂瓶和骨傀儡复活、三类传送物品、八种附魔蛛丝布与毒液。血族共享四系科技。已保留最新的燃烧兼容修复、创造飞行豁免，以及“开始喝牛奶时满血才产骨”的条件。
+
+**种族科技属于未完成部分。** 当前只在原版背包合成与工作台流程检查配方种族权限，其他模组的工作台、自动合成或机器流程可绕过该检查，跨模组的科技解锁限制尚未完成。物品、配方及联动基础已移入核心，后续仍需补齐统一权限与跨模组回归。
+
+新增服务端 `VMDieTechnology.getRace(player)`、`VMDieTechnology.hasTech(player, 'enderman')` 绑定，供 KubeJS 查询种族与科技资格；这些接口只提供查询，不会自动拦截其他模组的配方。
+
+详见 [使用说明](docs/怪物视角使用说明.md)、[移植与科技评估](docs/怪物视角移植与科技评估.md)、[验证记录](docs/移植验证记录.md)。
+
+升级时以 `vmdiecore-0.2.0.jar` 替换旧核心和独立的 `monster-perspective-*.jar`，两者不可并装。原 `monsterperspective:*` 注册 ID、玩家种族数据及 `monsterperspective-server.toml` 均保留。
 
 ## 初始维度
 

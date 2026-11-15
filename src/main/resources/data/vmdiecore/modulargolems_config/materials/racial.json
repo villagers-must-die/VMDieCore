@@ -1,0 +1,35 @@
+{
+  "ingredients": {
+    "monsterperspective:flesh": {
+      "item": "monsterperspective:flesh_part"
+    },
+    "monsterperspective:bone": {
+      "item": "monsterperspective:bone_part"
+    }
+  },
+  "repairIngredients": {
+    "monsterperspective:flesh": {
+      "tag": "monsterperspective:meat"
+    },
+    "monsterperspective:bone": {
+      "item": "minecraft:bone"
+    }
+  },
+  "partLimitation": {},
+  "modifiers": {
+    "monsterperspective:flesh": {},
+    "monsterperspective:bone": {}
+  },
+  "stats": {
+    "monsterperspective:flesh": {
+      "modulargolems:attack": 8.0,
+      "modulargolems:max_health": 70.0,
+      "modulargolems:regen": 2.0
+    },
+    "monsterperspective:bone": {
+      "modulargolems:attack": 12.0,
+      "modulargolems:max_health": 50.0,
+      "modulargolems:speed": 0.1
+    }
+  }
+}

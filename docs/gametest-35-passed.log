@@ -1,0 +1,260 @@
+[1511月2026 21:36:48.683] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserverdev, --gameDir, ., --fml.fmlVersion, 4.0.45, --fml.mcVersion, 1.21.1, --fml.neoForgeVersion, 21.1.266, --fml.neoFormVersion, 20240808.144430]
+[1511月2026 21:36:48.688] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as BellSoft OpenJDK 64-Bit Server VM 21.0.8+12-LTS
+[1511月2026 21:36:48.689] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.8 by BellSoft; OS Windows 11 arch amd64 version 10.0
+[1511月2026 21:36:48.869] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserverdev
+[1511月2026 21:36:48.950] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/suiyi/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.16.4+mixin.0.8.7/26d01f0567ab46e9ca0d2ed89d0ecc11aadbd433/sponge-mixin-0.16.4+mixin.0.8.7.jar%2394!/ Service=ModLauncher Env=SERVER
+[1511月2026 21:36:50.946] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.JarInJarDependencyLocator/]: Found 47 dependencies adding them to mods collection
+[1511月2026 21:36:50.952] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/]:
+     Mod List:
+		Name Version (Mod Id)
+
+		Ageratum 0.0.1+build.140 (ageratum)
+		AnvilCraft 1.6.0+rc.1 (anvilcraft)
+		AnvilLib 2.0.0+snapshot.649 (anvillib)
+		AnvilLib-Codec 2.0.0+snapshot.649 (anvillib_codec)
+		AnvilLib-Collision 2.0.0+snapshot.649 (anvillib_collision)
+		AnvilLib-Config 2.0.0+snapshot.649 (anvillib_config)
+		AnvilLib-Cube 2.0.0+snapshot.649 (anvillib_cube)
+		AnvilLib-Explosion 2.0.0+snapshot.649 (anvillib_explosion)
+		AnvilLib-Font 2.0.0+snapshot.649 (anvillib_font)
+		AnvilLib-Integration 2.0.0+snapshot.649 (anvillib_integration)
+		AnvilLib-Math 2.0.0+snapshot.649 (anvillib_math)
+		AnvilLib-MoveableEntityBlock 2.0.0+snapshot.649 (anvillib_moveable_entity_block)
+		AnvilLib-Multiblock 2.0.0+snapshot.649 (anvillib_multiblock)
+		AnvilLib-Network 2.0.0+snapshot.649 (anvillib_network)
+		AnvilLib-Recipe 2.0.0+snapshot.649 (anvillib_recipe)
+		AnvilLib-Registrum 2.0.0+snapshot.649 (anvillib_registrum)
+		AnvilLib-Renderer 2.0.0+snapshot.571 (anvillib_renderer)
+		AnvilLib-Rendering 2.0.0+snapshot.649 (anvillib_rendering)
+		AnvilLib-RPC 2.0.0+snapshot.649 (anvillib_rpc)
+		AnvilLib-Space-Select 2.0.0+snapshot.649 (anvillib_space_select)
+		AnvilLib-Sync 2.0.0+snapshot.649 (anvillib_sync)
+		AnvilLib-UI 2.0.0+snapshot.649 (anvillib_ui)
+		AnvilLib-Util 2.0.0+snapshot.649 (anvillib_util)
+		AnvilLib-Wheel 2.0.0+snapshot.649 (anvillib_wheel)
+		Applied Energistics 2 19.2.19 (ae2)
+		Architectury 13.0.12 (architectury)
+		Better Advanced Tooltips 2101.1.0-build.1 (betteradvancedtooltips)
+		Cataclysm Mux 1.0.4 (cataclysm_mux)
+		Cataclysm Mux 0327 1.0.4 (cataclysm_mux_0327)
+		Cataclysm Mux 3016 1.0.4 (cataclysm_mux_0316)
+		Curios API 9.5.1+1.21.1 (curios)
+		Glodium 1.21-2.2-neoforge (glodium)
+		GuideME 21.1.22 (guideme)
+		KilaGraph 21.1.0.16 (kilagraph)
+		KubeJS 2101.7.2-build.381 (kubejs)
+		L2Core 3.0.9+1 (l2core)
+		L2DamageTracker 3.0.8+3 (l2damagetracker)
+		L2ItemSelector 3.1.6 (l2itemselector)
+		L2Library 3.0.10 (l2library)
+		L2MenuStacker 3.0.10 (l2menustacker)
+		L2Tabs 3.0.6+7 (l2tabs)
+		LowDragLib2 2.2.46.a (ldlib2)
+		Minecraft 1.21.1 (minecraft)
+		Mob Weapon API 3.0.21 (mob_weapon_api)
+		Modular Golems 3.1.44 (modulargolems)
+		Multiblocked2 21.1.3 (mbd2)
+		NeoForge 21.1.266 (neoforge)
+		Rhino 2101.2.8-build.91 (rhino)
+		Useless Mod 1.21.1-2.4.6.6 (useless_mod)
+		VillagerMustDieCore 0.2.0 (vmdiecore)
+[1511月2026 21:36:58.931] [main/INFO] [dev.anvilcraft.lib.v2.sync.transform.SyncTargetIndex/]: Scan complete – 0 @Sync target(s) registered.
+[1511月2026 21:36:58.941] [main/INFO] [dev.anvilcraft.lib.v2.sync.transform.LazySyncTargetIndex/]: Scan complete – 0 @LazySync field(s) across 0 class(es).
+[1511月2026 21:36:59.840] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
+[1511月2026 21:36:59.950] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserverdev' with arguments [--gameDir, .]
+[1511月2026 21:37:00.099] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_rpc.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.102] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_moveable_entity_block.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.112] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_config.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.113] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_space_select.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.121] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_sync.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.125] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_network.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.130] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_collision.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.133] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.135] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_codec.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.137] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_util.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.139] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_math.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.144] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_integration.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.149] [main/WARN] [mixin/]: Reference map 'curios.refmap.json' for curios.neoforge.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.150] [main/WARN] [mixin/]: Reference map 'curios.refmap.json' for curios.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.152] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_font.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.154] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_registrum.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.157] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_explosion.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.163] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_wheel.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.167] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_recipe.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.196] [main/WARN] [mixin/]: Reference map 'anvillib.refmap.json' for anvillib_multiblock.mixins.json could not be read. If this is a development environment you can ignore this message
+[1511月2026 21:37:00.751] [main/WARN] [mixin/]: Error loading class: com/mohistmc/youer/util/PaperUnsupportedSettings (java.lang.ClassNotFoundException: com.mohistmc.youer.util.PaperUnsupportedSettings)
+[1511月2026 21:37:01.472] [main/WARN] [mixin/]: Error loading class: com/simibubi/create/content/kinetics/deployer/BeltDeployerCallbacks (java.lang.ClassNotFoundException: com.simibubi.create.content.kinetics.deployer.BeltDeployerCallbacks)
+[1511月2026 21:37:01.477] [main/WARN] [mixin/]: Error loading class: com/bobmowzie/mowziesmobs/server/entity/effects/EntityAxeAttack (java.lang.ClassNotFoundException: com.bobmowzie.mowziesmobs.server.entity.effects.EntityAxeAttack)
+[1511月2026 21:37:01.490] [main/WARN] [mixin/]: Error loading class: com/github/L_Ender/cataclysm/util/CustomExplosion/IgnisExplosion (java.lang.ClassNotFoundException: com.github.L_Ender.cataclysm.util.CustomExplosion.IgnisExplosion)
+[1511月2026 21:37:01.755] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/cluster/AdvCraftingCPU (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.cluster.AdvCraftingCPU)
+[1511月2026 21:37:01.763] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/AdvCraftingCPULogic (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.AdvCraftingCPULogic)
+[1511月2026 21:37:01.773] [main/WARN] [mixin/]: Error loading class: net/pedroksl/advanced_ae/common/logic/ExecutingCraftingJob (java.lang.ClassNotFoundException: net.pedroksl.advanced_ae.common.logic.ExecutingCraftingJob)
+[1511月2026 21:37:01.777] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/common/impl/block/entity/AbstractBotanyPotBlockEntity (java.lang.ClassNotFoundException: net.darkhax.botanypots.common.impl.block.entity.AbstractBotanyPotBlockEntity)
+[1511月2026 21:37:01.778] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.common.impl.block.entity.AbstractBotanyPotBlockEntity was not found useless_mod.mixins.json:botanypots.AbstractBotanyPotBlockEntityAccessor from mod useless_mod
+[1511月2026 21:37:01.783] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/common/impl/block/entity/BotanyPotBlockEntity (java.lang.ClassNotFoundException: net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity)
+[1511月2026 21:37:01.783] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityAccessor from mod useless_mod
+[1511月2026 21:37:01.785] [main/WARN] [mixin/]: Error loading class: net/darkhax/botanypots/common/impl/block/entity/BotanyPotBlockEntity (java.lang.ClassNotFoundException: net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity)
+[1511月2026 21:37:01.788] [main/WARN] [mixin/]: @Mixin target net.darkhax.botanypots.common.impl.block.entity.BotanyPotBlockEntity was not found useless_mod.mixins.json:botanypots.BotanyPotBlockEntityMixin from mod useless_mod
+[1511月2026 21:37:01.791] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/container/ContainerAssemblerMatrix$PatternSlotTracker (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker)
+[1511月2026 21:37:01.791] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.container.ContainerAssemblerMatrix$PatternSlotTracker was not found useless_mod.mixins.json:eae.PatternSlotTrackerMixin from mod useless_mod
+[1511月2026 21:37:01.793] [main/WARN] [mixin/]: Error loading class: com/glodblock/github/extendedae/common/tileentities/matrix/TileAssemblerMatrixPattern (java.lang.ClassNotFoundException: com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern)
+[1511月2026 21:37:01.795] [main/WARN] [mixin/]: @Mixin target com.glodblock.github.extendedae.common.tileentities.matrix.TileAssemblerMatrixPattern was not found useless_mod.mixins.json:eae.TileAssemblerMatrixPatternMixin from mod useless_mod
+[1511月2026 21:37:01.845] [main/WARN] [mixin/]: Error loading class: cn/dancingsnow/neoecoae/network/MenuDataCodecs (java.lang.ClassNotFoundException: cn.dancingsnow.neoecoae.network.MenuDataCodecs)
+[1511月2026 21:37:01.855] [main/WARN] [mixin/]: @Mixin target cn.dancingsnow.neoecoae.network.MenuDataCodecs was not found useless_mod.compact.mixins.json:MenuDataCodecsCompactMixin from mod useless_mod
+[1511月2026 21:37:01.860] [main/WARN] [mixin/]: Error loading class: cn/dancingsnow/neoecoae/blocks/entity/crafting/ECOCraftingSystemBlockEntity (java.lang.ClassNotFoundException: cn.dancingsnow.neoecoae.blocks.entity.crafting.ECOCraftingSystemBlockEntity)
+[1511月2026 21:37:01.863] [main/WARN] [mixin/]: @Mixin target cn.dancingsnow.neoecoae.blocks.entity.crafting.ECOCraftingSystemBlockEntity was not found useless_mod.compact.mixins.json:CraftingHostPanelCompactMixin from mod useless_mod
+[1511月2026 21:37:01.866] [main/WARN] [mixin/]: Error loading class: cn/dancingsnow/neoecoae/blocks/entity/computation/ECOComputationSystemBlockEntity (java.lang.ClassNotFoundException: cn.dancingsnow.neoecoae.blocks.entity.computation.ECOComputationSystemBlockEntity)
+[1511月2026 21:37:01.867] [main/WARN] [mixin/]: @Mixin target cn.dancingsnow.neoecoae.blocks.entity.computation.ECOComputationSystemBlockEntity was not found useless_mod.compact.mixins.json:ComputationHostPanelCompactMixin from mod useless_mod
+[1511月2026 21:37:02.945] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[1511月2026 21:37:21.440] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[1511月2026 21:37:21.443] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[1511月2026 21:37:21.450] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[1511月2026 21:37:21.451] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[1511月2026 21:37:21.455] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[1511月2026 21:37:21.586] [modloading-worker-0/INFO] [Multiblocked2/]: Multiblocked2 is initializing on platform: NeoForge
+[1511月2026 21:37:21.593] [modloading-worker-0/INFO] [LowDragLib2/]: LowDragLib2 is initializing on platform: NeoForge
+[1511月2026 21:37:21.721] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.266, for MC 1.21.1
+[1511月2026 21:37:21.742] [modloading-worker-0/INFO] [dev.anvilcraft.lib.v2.config.ConfigManager/]: Registering anvillib_explosion-common.toml for anvillib_explosion
+[1511月2026 21:37:21.805] [modloading-worker-0/INFO] [dev.anvilcraft.lib.v2.config.ConfigManager/]: Registering anvillib_multiblock-common.toml for anvillib_multiblock
+[1511月2026 21:37:22.072] [modloading-worker-0/INFO] [dev.anvilcraft.lib.v2.config.ConfigManager/]: Registering anvillib_recipe-common.toml for anvillib_recipe
+[1511月2026 21:37:22.643] [modloading-worker-0/INFO] [KubeJS Startup/]: Capturing errors for startup scripts enabled
+[1511月2026 21:37:22.643] [modloading-worker-0/INFO] [KubeJS Client/]: Capturing errors for client scripts enabled
+[1511月2026 21:37:22.648] [modloading-worker-0/INFO] [KubeJS/]: Loading vanilla registries...
+[1511月2026 21:37:22.682] [modloading-worker-0/INFO] [KubeJS/]: Looking for KubeJS plugins...
+[1511月2026 21:37:22.702] [modloading-worker-0/INFO] [KubeJS/]: Found plugin source kubejs
+[1511月2026 21:37:22.736] [modloading-worker-0/WARN] [KubeJS/]: Plugin dev.latvian.mods.kubejs.plugin.builtin.BuiltinKubeJSClientPlugin does not load on server side, skipping
+[1511月2026 21:37:22.739] [modloading-worker-0/INFO] [KubeJS/]: Found plugin source mbd2
+[1511月2026 21:37:22.745] [modloading-worker-0/INFO] [KubeJS/]: Found plugin source ldlib2
+[1511月2026 21:37:22.751] [modloading-worker-0/INFO] [KubeJS/]: Found plugin source useless_mod
+[1511月2026 21:37:22.757] [modloading-worker-0/INFO] [KubeJS/]: Found plugin source anvilcraft
+[1511月2026 21:37:22.758] [modloading-worker-0/ERROR] [KubeJS/]: Failed to load plugin dev.dubhe.anvilcraft.integration.kubejs.AnvilCraftKubeJsPlugin from source anvilcraft: java.lang.ClassNotFoundException: dev.dubhe.anvilcraft.integration.kubejs.AnvilCraftKubeJsPlugin
+[1511月2026 21:37:22.805] [modloading-worker-0/INFO] [KubeJS/]: Done in 110.1 ms
+[1511月2026 21:37:24.316] [modloading-worker-0/INFO] [com.lowdragmc.kilagraph.Kilagraph/]: KilaGraph blueprint nodes loaded: 530
+[1511月2026 21:37:24.399] [modloading-worker-0/INFO] [com.lowdragmc.kilagraph.Kilagraph/]: KilaGraph rendertype nodes loaded: 176
+[1511月2026 21:37:25.234] [modloading-worker-0/ERROR] [net.neoforged.fml.common.asm.RuntimeDistCleaner/DISTXFORM]: Attempted to load class net/minecraft/client/Minecraft for invalid dist DEDICATED_SERVER
+[1511月2026 21:37:25.262] [modloading-worker-0/INFO] [KubeJS/]: Added bindings for script type STARTUP from mod 'vmdiecore': [VMDieStacking]
+[1511月2026 21:37:25.340] [modloading-worker-0/INFO] [KubeJS Startup/]: startup_scripts:main.js#2: Hello, World! (Loaded startup example script)
+[1511月2026 21:37:25.344] [modloading-worker-0/INFO] [KubeJS Startup/]: Loaded script startup_scripts:main.js in 0.08 s
+[1511月2026 21:37:25.351] [modloading-worker-0/INFO] [KubeJS Startup/]: startup_scripts:vmdiecore_binding_test.js#2: VMDieCore startup binding loaded
+[1511月2026 21:37:25.352] [modloading-worker-0/INFO] [KubeJS Startup/]: Loaded script startup_scripts:vmdiecore_binding_test.js in 0.006 s
+[1511月2026 21:37:25.361] [modloading-worker-0/INFO] [KubeJS Startup/]: Loaded 2/2 KubeJS startup scripts in 2.496 s with 0 errors and 0 warnings
+[1511月2026 21:37:25.393] [modloading-worker-0/INFO] [KubeJS Startup/]: Validated 0 files in kubejs/data/ in 5ms
+[1511月2026 21:37:26.868] [modloading-worker-0/INFO] [dev.anvilcraft.lib.v2.integration.IntegrationManager/]: Considering integration dev.dubhe.anvilcraft.integration.jei.event.ReloadEventListener for {id:jei, version:*}
+[1511月2026 21:37:26.873] [modloading-worker-0/INFO] [dev.anvilcraft.lib.v2.integration.IntegrationManager/]: Considering integration dev.dubhe.anvilcraft.integration.curios.data.CuriosData for {id:curios, version:*}
+[1511月2026 21:37:26.874] [modloading-worker-0/INFO] [dev.anvilcraft.lib.v2.integration.IntegrationManager/]: Considering integration dev.dubhe.anvilcraft.integration.curios.client.CuriosClient for {id:curios, version:*}
+[1511月2026 21:37:26.884] [modloading-worker-0/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 0 Datafixer optimizations took 1 milliseconds
+[1511月2026 21:37:26.885] [modloading-worker-0/INFO] [AnvilCraft/]: Ciallo～(∠・ω< )⌒★
+[1511月2026 21:37:27.187] [modloading-worker-0/INFO] [dev.anvilcraft.lib.v2.config.ConfigManager/]: Registering anvilcraft-server.toml for anvilcraft
+[1511月2026 21:37:27.188] [modloading-worker-0/INFO] [dev.anvilcraft.lib.v2.config.ConfigManager/]: Registering anvilcraft-client.toml for anvilcraft
+[1511月2026 21:37:27.407] [modloading-sync-worker/INFO] [Multiblocked2/]: Loading recipe types
+[1511月2026 21:37:27.657] [modloading-sync-worker/INFO] [Multiblocked2/]: Loading machines
+[1511月2026 21:37:29.634] [modloading-sync-worker/WARN] [net.neoforged.fml.DeferredWorkQueue/LOADING]: Mod 'mbd2' took 2.395 s to run a deferred task.
+[1511月2026 21:37:31.755] [modloading-sync-worker/INFO] [AnvilCraft/]: tag: TagKey[minecraft:block / minecraft:incorrect_for_stone_tool]
+[1511月2026 21:37:31.755] [modloading-sync-worker/INFO] [AnvilCraft/]: tag: TagKey[minecraft:block / minecraft:incorrect_for_diamond_tool]
+[1511月2026 21:37:31.756] [modloading-sync-worker/INFO] [AnvilCraft/]: tag: TagKey[minecraft:block / minecraft:incorrect_for_netherite_tool]
+[1511月2026 21:37:31.756] [modloading-sync-worker/INFO] [AnvilCraft/]: tag: TagKey[minecraft:block / anvilcraft:incorrect_for_ember_tool]
+[1511月2026 21:37:31.757] [modloading-sync-worker/INFO] [AnvilCraft/]: tag: TagKey[minecraft:block / anvilcraft:incorrect_for_transcendium_tool]
+[1511月2026 21:37:32.524] [modloading-sync-worker/INFO] [dev.anvilcraft.lib.v2.sync.management.SyncManager/]: SYNC_ENTRY_REGISTRY Size: 3
+[1511月2026 21:37:35.160] [modloading-sync-worker/INFO] [KubeJS Startup/]: Capturing errors for startup scripts disabled
+[1511月2026 21:37:35.161] [modloading-sync-worker/INFO] [KubeJS Client/]: Capturing errors for client scripts disabled
+[1511月2026 21:37:35.227] [modloading-sync-worker/INFO] [dev.anvilcraft.lib.v2.network.register.NetworkRegistrar/]: Considering network package dev.anvilcraft.lib.v2.rpc.config
+[1511月2026 21:37:35.239] [modloading-sync-worker/INFO] [dev.anvilcraft.lib.v2.network.register.NetworkRegistrar/]: Considering network package dev.anvilcraft.lib.v2.rpc
+[1511月2026 21:37:35.309] [modloading-sync-worker/INFO] [dev.anvilcraft.lib.v2.network.register.NetworkRegistrar/]: Considering network package dev.anvilcraft.lib.v2.space_select.network.payload
+[1511月2026 21:37:35.463] [modloading-sync-worker/INFO] [dev.anvilcraft.lib.v2.network.register.NetworkRegistrar/]: Considering network package dev.anvilcraft.lib.v2.sync.network.payload
+[1511月2026 21:37:35.590] [modloading-sync-worker/INFO] [dev.anvilcraft.lib.v2.network.register.NetworkRegistrar/]: Considering network package dev.dubhe.anvilcraft.network.split
+[1511月2026 21:37:35.596] [modloading-sync-worker/INFO] [dev.anvilcraft.lib.v2.network.register.NetworkRegistrar/]: Considering network package dev.dubhe.anvilcraft.network.multiple
+[1511月2026 21:37:35.618] [modloading-sync-worker/INFO] [dev.anvilcraft.lib.v2.network.register.NetworkRegistrar/]: Considering network package dev.dubhe.anvilcraft.network
+[1511月2026 21:37:35.845] [modloading-sync-worker/INFO] [dev.anvilcraft.lib.v2.network.register.NetworkRegistrar/]: Considering network package dev.anvilcraft.lib.v2.multiblock.network
+[1511月2026 21:37:35.942] [main/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[1511月2026 21:37:36.086] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/suiyi/AppData/Local/pcl/.minecraft/versions/初版2/VMDieCore/build/moddev/artifacts/neoforge-21.1.266.jar%23125!/assets/.mcassetsroot' uses unexpected schema
+[1511月2026 21:37:36.087] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/suiyi/AppData/Local/pcl/.minecraft/versions/初版2/VMDieCore/build/moddev/artifacts/neoforge-21.1.266.jar%23125!/data/.mcassetsroot' uses unexpected schema
+[1511月2026 21:37:36.095] [main/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: [vmdiecore, monsterperspective]
+[1511月2026 21:37:36.636] [main/INFO] [KubeJS Server/]: Capturing errors for server scripts enabled
+[1511月2026 21:37:36.727] [main/INFO] [KubeJS/]: Added bindings for script type SERVER from mod 'vmdiecore': [VMDieTechnology]
+[1511月2026 21:37:36.728] [main/INFO] [KubeJS Server/]: server_scripts:main.js#2: Hello, World! (Loaded server example script)
+[1511月2026 21:37:36.730] [main/INFO] [KubeJS Server/]: Loaded script server_scripts:main.js in 0.002 s
+[1511月2026 21:37:36.755] [main/INFO] [KubeJS Server/]: Loaded script server_scripts:vmdiecore_binding_test.js in 0.023 s
+[1511月2026 21:37:36.806] [main/INFO] [KubeJS Server/]: Loaded 2/2 KubeJS server scripts in 0.17 s with 0 errors and 0 warnings
+[1511月2026 21:37:36.810] [main/INFO] [KubeJS/]: Loaded 59 data packs: bundle, trade_rebalance, vanilla, KubeJS Virtual Resource Pack [Before Mods, data], mod_data, mod/anvillib_rpc, mod/rhino, mod/l2tabs, mod/anvillib_moveable_entity_block, mod/cataclysm_mux_0316, mod/ae2, mod/anvillib_cube, mod/mbd2, mod/cataclysm_mux, mod/anvillib_config, mod/anvillib_space_select, mod/neoforge, mod/kubejs, mod/anvillib_sync, mod/anvillib_network, mod/ageratum, mod/anvillib_rendering, mod/anvillib_ui, mod/kilagraph, mod/anvillib_renderer, mod/anvillib_collision, mod/guideme, mod/cataclysm_mux_0327, mod/anvillib, mod/anvillib_codec, mod/anvillib_util, mod/anvillib_math, mod/l2damagetracker, mod/ldlib2, mod/glodium, mod/anvillib_integration, mod/modulargolems, mod/curios, mod/l2core, mod/anvillib_font, mod/mob_weapon_api, mod/anvillib_registrum, mod/betteradvancedtooltips, mod/anvillib_explosion, mod/architectury, mod/anvillib_wheel, mod/l2itemselector, mod/l2library, mod/useless_mod, mod/anvillib_recipe, mod/anvilcraft, mod/vmdiecore, mod/l2menustacker, KubeJS Virtual Resource Pack [Internal, data], KubeJS Virtual Resource Pack [Registries, data], KubeJS Virtual Resource Pack [After Mods, data], KubeJS File Resource Pack [data], mod/anvillib_multiblock, KubeJS Virtual Resource Pack [Last, data]
+[1511月2026 21:37:38.759] [Worker-Main-2/ERROR] [net.minecraft.world.level.storage.loot.LootDataType/]: Couldn't parse element ResourceKey[minecraft:root / minecraft:loot_table]:useless_mod:blocks/useless_compact_l9 - Unknown registry key in ResourceKey[minecraft:root / minecraft:item]: useless_mod:useless_compact_l9
+[1511月2026 21:37:38.795] [Worker-Main-2/ERROR] [net.minecraft.world.level.storage.loot.LootDataType/]: Couldn't parse element ResourceKey[minecraft:root / minecraft:loot_table]:useless_mod:blocks/useless_compact_f9 - Unknown registry key in ResourceKey[minecraft:root / minecraft:item]: useless_mod:useless_compact_f9
+[1511月2026 21:37:38.817] [Worker-Main-2/ERROR] [net.minecraft.world.level.storage.loot.LootDataType/]: Couldn't parse element ResourceKey[minecraft:root / minecraft:loot_table]:useless_mod:blocks/useless_compact_c9 - Unknown registry key in ResourceKey[minecraft:root / minecraft:item]: useless_mod:useless_compact_c9
+[1511月2026 21:37:39.002] [Worker-Main-2/ERROR] [net.minecraft.world.level.storage.loot.LootDataType/]: Couldn't parse element ResourceKey[minecraft:root / minecraft:loot_table]:modulargolems:golem_guide - No component with type: 'patchouli:book'; No component with type: 'patchouli:book' missed input: {"patchouli:book":"modulargolems:golem_guide"}; Unknown registry key in ResourceKey[minecraft:root / minecraft:item]: patchouli:guide_book
+[1511月2026 21:37:39.274] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SpawnExtraGridTestTools for plots
+[1511月2026 21:37:39.276] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InscriberTestPlots for plots
+[1511月2026 21:37:39.282] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderLockModePlots for plots
+[1511月2026 21:37:39.285] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ChannelTests for plots
+[1511月2026 21:37:39.285] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderPlots for plots
+[1511月2026 21:37:39.286] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InvalidPatternTestPlot for plots
+[1511月2026 21:37:39.286] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AnnihilationPlaneTests for plots
+[1511月2026 21:37:39.286] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.CraftingTerminalTestPlots for plots
+[1511月2026 21:37:39.286] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ExternalEnergyTestPlots for plots
+[1511月2026 21:37:39.287] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.GuidebookPlot for plots
+[1511月2026 21:37:39.287] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.QnbTestPlots for plots
+[1511月2026 21:37:39.287] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ItemP2PTestPlots for plots
+[1511月2026 21:37:39.287] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.TestPlots for plots
+[1511月2026 21:37:39.289] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AutoCraftingTestPlots for plots
+[1511月2026 21:37:39.289] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SpatialTestPlots for plots
+[1511月2026 21:37:39.290] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.CrystalResonanceGeneratorTestPlots for plots
+[1511月2026 21:37:39.290] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SubnetPlots for plots
+[1511月2026 21:37:39.290] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InterfaceTestPlots for plots
+[1511月2026 21:37:39.290] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.P2PTestPlots for plots
+[1511月2026 21:37:39.290] [Worker-Main-2/INFO] [AE2:C/]: Scanning class appeng.server.testplots.MemoryCardTestPlots for plots
+[1511月2026 21:37:44.316] [main/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 3761 recipes
+[1511月2026 21:37:47.072] [main/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 3709 advancements
+[1511月2026 21:37:47.155] [main/INFO] [Curios API/]: Loaded 12 curio slots
+[1511月2026 21:37:47.189] [main/ERROR] [Curios API/]: feet is not a registered slot type!
+[1511月2026 21:37:47.193] [main/ERROR] [Curios API/]: heart_amulet is not a registered slot type!
+[1511月2026 21:37:47.197] [main/ERROR] [Curios API/]: artifact_belt is not a registered slot type!
+[1511月2026 21:37:47.197] [main/ERROR] [Curios API/]: halo is not a registered slot type!
+[1511月2026 21:37:47.197] [main/ERROR] [Curios API/]: artifact_bracelet is not a registered slot type!
+[1511月2026 21:37:47.197] [main/ERROR] [Curios API/]: spellbook is not a registered slot type!
+[1511月2026 21:37:47.199] [main/ERROR] [Curios API/]: artifact_head is not a registered slot type!
+[1511月2026 21:37:47.199] [main/ERROR] [Curios API/]: artifact_body is not a registered slot type!
+[1511月2026 21:37:47.202] [main/ERROR] [Curios API/]: hostility_curse is not a registered slot type!
+[1511月2026 21:37:47.206] [main/ERROR] [Curios API/]: artifact_necklace is not a registered slot type!
+[1511月2026 21:37:47.211] [main/ERROR] [Curios API/]: boot is not a registered slot type!
+[1511月2026 21:37:47.211] [main/ERROR] [Curios API/]: accessory is not a registered slot type!
+[1511月2026 21:37:47.217] [main/INFO] [Curios API/]: Loaded 4 curio entities
+[1511月2026 21:37:50.629] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[1511月2026 21:37:50.630] [Server thread/INFO] [KubeJS Server/]: Capturing errors for server scripts disabled
+[1511月2026 21:37:50.669] [Server thread/INFO] [KubeJS/]: Added bindings for script type SERVER from mod 'vmdiecore': [VMDieTechnology]
+[1511月2026 21:37:50.669] [Server thread/INFO] [KubeJS Server/]: Server resource reload complete!
+[1511月2026 21:37:50.781] [worldgen/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 2%
+[1511月2026 21:37:51.133] [worldgen/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 51%
+[1511月2026 21:37:51.277] [Server thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 648 ms
+[1511月2026 21:37:51.315] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: Started game test server
+[1511月2026 21:37:51.616] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[1511月2026 21:37:51.627] [Server thread/INFO] [KubeJS Server/]: Loaded Java class 'net.neoforged.neoforge.common.util.FakePlayerFactory'
+[1511月2026 21:37:51.629] [Server thread/INFO] [KubeJS Server/]: Loaded Java class 'org.dishanhai.vmdiecore.monster.Race'
+[1511月2026 21:37:51.631] [Server thread/INFO] [KubeJS Server/]: Loaded Java class 'org.dishanhai.vmdiecore.monster.RaceEvents'
+[1511月2026 21:37:52.029] [Server thread/INFO] [KubeJS Server/]: VMDieCore technology binding queries passed
+[1511月2026 21:37:54.116] [Server thread/INFO] [com.sorrowmist.useless.content.recipe.AlloyFurnaceRecipeCatalog/]: Built alloy-furnace recipe catalog: generation=0, recipes=1002, sources=4, elapsed=1801 ms
+[1511月2026 21:37:54.363] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: 35 tests are now running at position -9735970, -59, -14925617!
+[1511月2026 21:37:55.648] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestRunner/]: Running test batch 'defaultBatch:0' (35 tests)...
+[1511月2026 21:37:55.742] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: [                                   ]
+[1511月2026 21:37:56.809] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ArchiveTest has made the advancement [Welcome to AnvilCraft]
+[1511月2026 21:37:57.303] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ArchiveTest has made the advancement [Welcome to AnvilCraft]
+[1511月2026 21:37:57.355] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: [+++++++ +++++++  ++++++            ]
+[1511月2026 21:37:57.778] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: [+++++++++++++++++++++++++++++++++++]
+[1511月2026 21:37:57.779] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: ========= 35 GAME TESTS COMPLETE IN 3.415 s ======================
+[1511月2026 21:37:57.779] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: All 35 required tests passed :)
+[1511月2026 21:37:57.780] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: ====================================================
+[1511月2026 21:37:57.830] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[1511月2026 21:37:57.831] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[1511月2026 21:37:57.832] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[1511月2026 21:37:59.423] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Test Level]'/minecraft:overworld
+[1511月2026 21:38:00.143] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Test Level]'/minecraft:the_end
+[1511月2026 21:38:00.158] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Test Level]'/minecraft:the_nether
+[1511月2026 21:38:00.175] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Test Level]'/ae2:spatial_storage
+[1511月2026 21:38:00.232] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[1511月2026 21:38:00.232] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[1511月2026 21:38:00.232] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[1511月2026 21:38:00.233] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[1511月2026 21:38:00.233] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[1511月2026 21:38:00.262] [Server thread/INFO] [KubeJS/]: Closed KubeJS Virtual Resource Pack [Before Mods, data]
+[1511月2026 21:38:00.262] [Server thread/INFO] [KubeJS/]: Closed KubeJS Virtual Resource Pack [Internal, data]
+[1511月2026 21:38:00.262] [Server thread/INFO] [KubeJS/]: Closed KubeJS Virtual Resource Pack [Registries, data]
+[1511月2026 21:38:00.263] [Server thread/INFO] [KubeJS/]: Closed KubeJS Virtual Resource Pack [After Mods, data]
+[1511月2026 21:38:00.263] [Server thread/INFO] [KubeJS/]: Closed KubeJS Virtual Resource Pack [Last, data]
+[1511月2026 21:38:00.333] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: Game test server shutting down

@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "modulargolems"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "modulargolems:metal_golem_legs"
+    },
+    {
+      "item": "monsterperspective:bone_part"
+    }
+  ],
+  "result": {
+    "id": "modulargolems:metal_golem_legs",
+    "components": {
+      "modulargolems:part_material": "monsterperspective:bone"
+    }
+  }
+}

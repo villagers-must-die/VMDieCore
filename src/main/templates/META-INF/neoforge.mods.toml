@@ -53,6 +53,9 @@ Core mod for the Villager Must Die modpack.
 [[mixins]]
 config="${mod_id}.neoforge.mixin.json"
 
+[[mixins]]
+config="monsterperspective.mixins.json"
+
 # The [[accessTransformers]] block allows you to declare where your AT file is.
 # If this block is omitted, a fallback attempt will be made to load an AT from META-INF/accesstransformer.cfg
 #[[accessTransformers]]
@@ -105,6 +108,28 @@ config="${mod_id}.neoforge.mixin.json"
     type="required"
     versionRange="${mbd2_version_range}"
     ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="curios"
+    type="optional"
+    versionRange="[9.5.1,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="modulargolems"
+    type="optional"
+    versionRange="[3.1.44,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="monsterperspective"
+    type="incompatible"
+    versionRange="[0,)"
+    reason="Monster Perspective is included in VMDieCore. Remove the standalone monster-perspective JAR."
+    ordering="NONE"
     side="BOTH"
 
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares
