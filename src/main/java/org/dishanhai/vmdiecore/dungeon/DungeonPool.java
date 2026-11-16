@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -235,12 +234,10 @@ public final class DungeonPool {
 
     public static void restore(MinecraftServer server) {
         DungeonStore store = DungeonStore.get(server);
-        List<Integer> dead = new ArrayList<>();
         for (DungeonStore.Stored stored : store.all()) {
             ResourceLocation themeId = ResourceLocation.tryParse(stored.theme());
             if (themeId == null) {
-                VMDieCore.LOGGER.warn("丢弃地牢 #{}：种类 id 无效", stored.id());
-                dead.add(stored.id());
+                VMDieCore.LOGGER.warn("暂不恢复地牢 #{}：种类 id 无效，保留存档", stored.id());
                 continue;
             }
             DungeonProfile profile = DungeonDefinitions.theme(themeId)
@@ -248,8 +245,7 @@ public final class DungeonPool {
                     .flatMap(tier -> DungeonDefinitions.profile(tier.profileId()))
                     .orElse(null);
             if (profile == null) {
-                VMDieCore.LOGGER.warn("丢弃地牢 #{}：定义已不存在", stored.id());
-                dead.add(stored.id());
+                VMDieCore.LOGGER.warn("暂不恢复地牢 #{}：定义不可用，保留存档", stored.id());
                 continue;
             }
             ResourceKey<Level> key = ResourceKey.create(Registries.DIMENSION, stored.key());
@@ -260,9 +256,6 @@ public final class DungeonPool {
             ENTRIES.put(stored.id(), new Entry(new DungeonInstance(stored.id(), themeId, stored.level(),
                     stored.hasExit(), stored.createdAt()), level));
             VMDieCore.LOGGER.info("恢复地牢 #{} {}", stored.id(), key.location());
-        }
-        for (int id : dead) {
-            store.remove(id);
         }
         nextId = store.nextId();
         cleanupOrphans(server, store);

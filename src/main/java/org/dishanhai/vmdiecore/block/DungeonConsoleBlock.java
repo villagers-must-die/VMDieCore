@@ -1,7 +1,5 @@
 package org.dishanhai.vmdiecore.block;
 
-import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
-import com.lowdragmc.lowdraglib2.gui.ui.ModularUI;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
@@ -13,9 +11,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.dishanhai.vmdiecore.config.VMDConfig;
-import org.dishanhai.vmdiecore.ui.DungeonConsoleUI;
+import org.dishanhai.vmdiecore.ui.DungeonConsoleMenu;
 
-public class DungeonConsoleBlock extends Block implements EntityBlock, BlockUIMenuType.BlockUI {
+public class DungeonConsoleBlock extends Block implements EntityBlock {
     public DungeonConsoleBlock(Properties properties) {
         super(properties);
     }
@@ -34,13 +32,9 @@ public class DungeonConsoleBlock extends Block implements EntityBlock, BlockUIMe
             return InteractionResult.FAIL;
         }
         if (player instanceof ServerPlayer serverPlayer) {
-            BlockUIMenuType.openUI(serverPlayer, pos);
+            DungeonConsoleMenu.open(serverPlayer, pos);
         }
         return InteractionResult.SUCCESS;
     }
 
-    @Override
-    public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
-        return DungeonConsoleUI.create(holder);
-    }
 }

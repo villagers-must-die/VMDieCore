@@ -1,6 +1,10 @@
 package org.dishanhai.vmdiecore.registry;
 
 import net.minecraft.core.registries.Registries;
+import com.lowdragmc.lowdraglib2.gui.holder.ModularUIContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
+import org.dishanhai.vmdiecore.ui.DungeonConsoleMenu;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -18,6 +22,11 @@ import org.dishanhai.vmdiecore.block.DungeonConsoleBlock;
 import org.dishanhai.vmdiecore.block.DungeonConsoleBlockEntity;
 
 public final class VMDRegistries {
+    public static final DeferredRegister<MenuType<?>> MENUS =
+            DeferredRegister.create(Registries.MENU, VMDieCore.MOD_ID);
+    public static final DeferredHolder<MenuType<?>, MenuType<ModularUIContainerMenu>> CONSOLE_MENU =
+            MENUS.register("dungeon_console", () -> IMenuTypeExtension.create(DungeonConsoleMenu::create));
+
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(Registries.BLOCK, VMDieCore.MOD_ID);
     public static final DeferredRegister<Item> ITEMS =
@@ -48,6 +57,7 @@ public final class VMDRegistries {
                     .build());
 
     public static void register(IEventBus bus) {
+        MENUS.register(bus);
         BLOCKS.register(bus);
         ITEMS.register(bus);
         BLOCK_ENTITIES.register(bus);

@@ -22,6 +22,8 @@ public final class DungeonStore extends SavedData {
     private static final SavedData.Factory<DungeonStore> FACTORY =
             new SavedData.Factory<>(DungeonStore::new, DungeonStore::load, DataFixTypes.LEVEL);
 
+    private int nextId = 1;
+
     private final Map<Integer, Stored> entries = new LinkedHashMap<>();
 
     public record Stored(int id, String theme, int level, boolean hasExit, long createdAt,
@@ -66,8 +68,10 @@ public final class DungeonStore extends SavedData {
             Stored stored = Stored.load(list.getCompound(i));
             if (stored != null) {
                 store.entries.put(stored.id(), stored);
+                store.nextId = Math.max(store.nextId, stored.id() + 1);
             }
         }
+        store.nextId = Math.max(store.nextId, tag.getInt("next_id"));
         return store;
     }
 
@@ -78,6 +82,7 @@ public final class DungeonStore extends SavedData {
             list.add(stored.save());
         }
         tag.put("dungeons", list);
+        tag.putInt("next_id", nextId);
         return tag;
     }
 
@@ -87,6 +92,7 @@ public final class DungeonStore extends SavedData {
 
     public void put(Stored stored) {
         entries.put(stored.id(), stored);
+        nextId = Math.max(nextId, stored.id() + 1);
         setDirty();
     }
 
@@ -97,6 +103,6 @@ public final class DungeonStore extends SavedData {
     }
 
     public int nextId() {
-        return entries.keySet().stream().mapToInt(Integer::intValue).max().orElse(0) + 1;
+        return nextId;
     }
 }

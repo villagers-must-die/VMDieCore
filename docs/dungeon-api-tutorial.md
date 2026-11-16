@@ -50,7 +50,8 @@ data/mypack/dungeon_rule/test_open.json
       "level": 1,
       "name": "浅仓",
       "pool": "minecraft:trial_chambers/chamber/end",
-      "profile": "mypack:test_room"
+      "profile": "mypack:test_room",
+      "rule": "mypack:test_open"
     },
     {
       "level": 2,
@@ -67,7 +68,7 @@ data/mypack/dungeon_rule/test_open.json
 }
 ```
 
-1 级用默认规则，`has_exit` 缺省就是 true，能进。2 级关掉出口，同时换成开放规则，否则默认规则会拦住它。`pools` 数组是按顺序尝试，第一个拼成功的生效。
+两个等级都显式引用开放规则 `mypack:test_open`，不存在隐式默认规则。1 级的 `has_exit` 缺省为 true，2 级为 false；开放规则允许两者进入。`pools` 数组是按顺序尝试，第一个拼成功的生效。
 
 ### 1.4 规则：允许没有出口
 
@@ -214,7 +215,7 @@ created.ifPresent(value -> VMDungeons.enter(player, value));
 | --- | --- |
 | 每一级用不同的结构池 | `tiers` 里每项写自己的 `pool`/`pools` |
 | 一个等级里随机从几个结构里挑 | 一个池里放多个模板，或者 `pools` 写多个池按顺序回退 |
-| 某级不允许进入 | 保留默认规则，写 `has_exit: false` |
+| 某级不允许进入 | 引用 `require_exit_point: true` 的规则，并写 `has_exit: false` |
 | 某级没有出口但还要能进 | 配一个 `require_exit_point: false` 的规则，在等级里引用 |
 | 每个地牢时间都固定 | 维度档写 `fixed_time: 6000`（白天）或 `18000`（午夜） |
 | 不要改时间 | `fixed_time: -1` |
@@ -231,7 +232,7 @@ created.ifPresent(value -> VMDungeons.enter(player, value));
 
 **进不去，命令回「进入失败」**
 
-按顺序查：地牢 id 对不对 → 日志里有没有「没有撤离点」→ 等级是不是 `has_exit: false` 还挂着默认规则。日志的 warn 会说明是哪一步拦下的。
+按顺序查：地牢 id 对不对 → 日志里有没有「没有撤离点」→ 等级是不是 `has_exit: false` 还挂着 `require_exit_point: true` 的规则。日志的 warn 会说明是哪一步拦下的。
 
 **创建成功但建筑没出现**
 

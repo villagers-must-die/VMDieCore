@@ -1,7 +1,7 @@
 package org.dishanhai.vmdiecore.ui;
 
-import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
 import com.lowdragmc.lowdraglib2.gui.texture.ColorRectTexture;
+import com.lowdragmc.lowdraglib2.gui.sync.bindings.impl.DataBindingBuilder;
 import com.lowdragmc.lowdraglib2.gui.ui.ModularUI;
 import com.lowdragmc.lowdraglib2.gui.ui.UI;
 import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
@@ -15,17 +15,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import org.dishanhai.vmdiecore.api.DungeonApi;
 import org.dishanhai.vmdiecore.api.DungeonInfo;
-import org.dishanhai.vmdiecore.api.DungeonTheme;
-import org.dishanhai.vmdiecore.api.TierDefinition;
-import org.dishanhai.vmdiecore.config.VMDConfig;
-import org.dishanhai.vmdiecore.data.DungeonDefinitions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public final class DungeonConsoleUI {
 
-    public static ModularUI create(BlockUIMenuType.BlockUIHolder holder) {
+    public static ModularUI create(DungeonConsoleMenu.Holder holder) {
         UIElement root = new UIElement();
         root.layout(layout -> layout.width(260).height(190).paddingAll(4).gapAll(4)
                 .flexDirection(FlexDirection.COLUMN));
@@ -41,45 +36,44 @@ public final class DungeonConsoleUI {
         return ModularUI.of(UI.of(root), holder.player);
     }
 
-    private static UIElement overviewPage(BlockUIMenuType.BlockUIHolder holder) {
+    private static UIElement overviewPage(DungeonConsoleMenu.Holder holder) {
         UIElement page = page();
         page.addChildren(
-                label("地牢数量 " + listFor(holder).size() + "/" + VMDConfig.maxDungeons()),
-                label("种类 " + DungeonDefinitions.themeCount() + " 种"),
-                label("维度档 " + DungeonDefinitions.profileCount() + " 个"),
-                label("规则 " + DungeonDefinitions.ruleCount() + " 条"),
+                label("地牢数量 " + listFor(holder).size() + "/" + holder.snapshot.maxDungeons()),
+                label("种类 " + holder.snapshot.themes().size() + " 种"),
+                label("维度档 " + holder.snapshot.profileCount() + " 个"),
+                label("规则 " + holder.snapshot.ruleCount() + " 条"),
                 button("刷新", () -> reopen(holder)));
         return page;
     }
 
-    private static UIElement createPage(BlockUIMenuType.BlockUIHolder holder) {
+    private static UIElement createPage(DungeonConsoleMenu.Holder holder) {
         UIElement page = page();
-        List<DungeonTheme> themes = new ArrayList<>(DungeonDefinitions.themes());
-        themes.sort((left, right) -> left.id().compareTo(right.id()));
+        List<DungeonConsoleSnapshot.Theme> themes = holder.snapshot.themes();
         if (themes.isEmpty()) {
             page.addChild(label("没有可用的地牢种类"));
             return page;
         }
         UIElement rows = new UIElement();
         rows.layout(layout -> layout.widthPercent(100).flex(1).gapAll(2).flexDirection(FlexDirection.COLUMN));
-        for (DungeonTheme theme : themes) {
+        for (DungeonConsoleSnapshot.Theme theme : themes) {
             rows.addChild(themeRow(holder, theme));
         }
         page.addChild(rows);
         return page;
     }
 
-    private static UIElement themeRow(BlockUIMenuType.BlockUIHolder holder, DungeonTheme theme) {
+    private static UIElement themeRow(DungeonConsoleMenu.Holder holder, DungeonConsoleSnapshot.Theme theme) {
         UIElement row = new UIElement();
         row.layout(layout -> layout.widthPercent(100).height(18).gapAll(3)
                 .flexDirection(FlexDirection.ROW).alignItems(AlignItems.CENTER));
         row.addChild(label(theme.name()).layout(layout -> layout.width(72)));
-        for (TierDefinition tier : theme.tierList()) {
+        for (DungeonConsoleSnapshot.Tier tier : theme.tiers()) {
             Button button = new Button();
             button.setText(Component.literal(tier.name()));
             button.layout(layout -> layout.width(52).height(16));
             button.setOnServerClick(event -> {
-                if (DungeonApi.create(theme.id(), tier.level()).isPresent()) {
+                if (canAct(holder) && DungeonApi.create(theme.id(), tier.level()).isPresent()) {
                     reopen(holder);
                 }
             });
@@ -88,7 +82,7 @@ public final class DungeonConsoleUI {
         return row;
     }
 
-    private static UIElement listPage(BlockUIMenuType.BlockUIHolder holder) {
+    private static UIElement listPage(DungeonConsoleMenu.Holder holder) {
         UIElement page = page();
         List<DungeonInfo> dungeons = listFor(holder);
         if (dungeons.isEmpty()) {
@@ -111,12 +105,17 @@ public final class DungeonConsoleUI {
         return "#" + info.id() + " " + info.themeName() + " " + info.levelName() + " 次数" + info.visits();
     }
 
-    private static Button deleteButton(BlockUIMenuType.BlockUIHolder holder, int dungeonId) {
+    private static Button deleteButton(DungeonConsoleMenu.Holder holder, int dungeonId) {
         boolean[] armed = {false};
         Button button = new Button();
         button.setText(Component.literal("删除"));
         button.layout(layout -> layout.width(36).height(14));
+        var confirmation = DataBindingBuilder.stringS2C(() -> armed[0] ? "确认" : "删除")
+                .build(holder.player.level().isClientSide);
+        confirmation.registerListener(button::setText);
+        button.addSyncValue(confirmation.getSyncValue());
         button.setOnServerClick(event -> {
+            if (!canAct(holder)) return;
             if (!armed[0]) {
                 armed[0] = true;
                 button.setText(Component.literal("确认"));
@@ -129,16 +128,20 @@ public final class DungeonConsoleUI {
         return button;
     }
 
-    private static void reopen(BlockUIMenuType.BlockUIHolder holder) {
-        if (!(holder.player instanceof ServerPlayer player)) {
+    private static void reopen(DungeonConsoleMenu.Holder holder) {
+        if (!(holder.player instanceof ServerPlayer player) || !canAct(holder)) {
             return;
         }
         player.closeContainer();
-        player.server.execute(() -> BlockUIMenuType.openUI(player, holder.pos));
+        player.server.execute(() -> DungeonConsoleMenu.open(player, holder.pos));
     }
 
-    private static List<DungeonInfo> listFor(BlockUIMenuType.BlockUIHolder holder) {
-        return holder.player instanceof ServerPlayer player ? DungeonApi.listFor(player) : DungeonApi.list();
+    private static List<DungeonInfo> listFor(DungeonConsoleMenu.Holder holder) {
+        return holder.snapshot.dungeons();
+    }
+
+    private static boolean canAct(DungeonConsoleMenu.Holder holder) {
+        return holder.player instanceof ServerPlayer player && DungeonConsoleMenu.canUse(player, holder.pos);
     }
 
     private static UIElement page() {

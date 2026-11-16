@@ -27,7 +27,7 @@ public final class OriginWorld {
     public static final ResourceKey<Level> ORIGIN = ResourceKey.create(Registries.DIMENSION,
             ResourceLocation.fromNamespaceAndPath(VMDieCore.MOD_ID, "origin"));
     public static final double SPAWN_X = 0.5;
-    public static final double SPAWN_Y = 64.0;
+    public static final double SPAWN_Y = 65.0;
     public static final double SPAWN_Z = 0.5;
     public static final BlockPos SPAWN_POS = BlockPos.containing(SPAWN_X, SPAWN_Y, SPAWN_Z);
 
@@ -37,7 +37,6 @@ public final class OriginWorld {
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         CompoundTag persisted = player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
-        if (persisted.getBoolean(PLAYER_INITIALIZED)) return;
         ServerLevel level = player.server.getLevel(ORIGIN);
         if (level == null) return;
         OriginData data = level.getDataStorage()
@@ -45,8 +44,13 @@ public final class OriginWorld {
         if (!data.initialized) {
             buildLobby(level);
             data.initialized = true;
+            data.layoutVersion = 2;
+            data.setDirty();
+        } else if (data.layoutVersion < 2 && installLegacyConsole(level)) {
+            data.layoutVersion = 2;
             data.setDirty();
         }
+        if (persisted.getBoolean(PLAYER_INITIALIZED)) return;
         player.setRespawnPosition(ORIGIN, SPAWN_POS, 0.0F, true, false);
         player.teleportTo(level, SPAWN_X, SPAWN_Y, SPAWN_Z, 0.0F, 0.0F);
         persisted.putBoolean(PLAYER_INITIALIZED, true);
@@ -68,6 +72,28 @@ public final class OriginWorld {
         player.setRespawnPosition(ORIGIN, SPAWN_POS, 0.0F, true, false);
         player.teleportTo(level, SPAWN_X, SPAWN_Y, SPAWN_Z, 0.0F, 0.0F);
         return true;
+    }
+
+    /** Add the console inside the old room without rebuilding or overwriting player blocks. */
+    private static boolean installLegacyConsole(ServerLevel level) {
+        for (int x = -3; x <= 3; x++) {
+            for (int z = -3; z <= 3; z++) {
+                BlockPos pos = new BlockPos(x, 65, z);
+                if (level.getBlockState(pos).is(VMDRegistries.DUNGEON_CONSOLE.get())) return true;
+            }
+        }
+        for (int x = 3; x >= -3; x--) {
+            for (int z = 3; z >= -3; z--) {
+                if (Math.abs(x) <= 1 && Math.abs(z) <= 1) continue;
+                BlockPos pos = new BlockPos(x, 65, z);
+                if (level.isEmptyBlock(pos) && level.getBlockState(pos.below()).isSolidRender(level, pos.below())) {
+                    level.setBlock(pos, VMDRegistries.DUNGEON_CONSOLE.get().defaultBlockState(), 3);
+                    return true;
+                }
+            }
+        }
+        VMDieCore.LOGGER.warn("旧大厅没有空位放置地牢控制台；保留原有方块，下次登录重试");
+        return false;
     }
 
     public static void buildLobby(ServerLevel level) {
@@ -107,16 +133,19 @@ public final class OriginWorld {
 
     public static final class OriginData extends SavedData {
         private boolean initialized;
+        private int layoutVersion;
 
         private static OriginData load(CompoundTag tag, HolderLookup.Provider registries) {
             OriginData data = new OriginData();
             data.initialized = tag.getBoolean("initialized");
+            data.layoutVersion = tag.getInt("layout_version");
             return data;
         }
 
         @Override
         public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
             tag.putBoolean("initialized", initialized);
+            tag.putInt("layout_version", layoutVersion);
             return tag;
         }
     }
