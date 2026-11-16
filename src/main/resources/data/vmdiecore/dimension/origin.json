@@ -10,15 +10,15 @@
       "layers": [
         {
           "block": "minecraft:bedrock",
-          "height": 1
+          "height": 3
         },
         {
           "block": "minecraft:stone",
-          "height": 382
+          "height": 378
         },
         {
           "block": "minecraft:bedrock",
-          "height": 1
+          "height": 3
         }
       ]
     }

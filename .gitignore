@@ -42,3 +42,9 @@ libs/
 **/src/generated/**/.cache/
 repo/
 !**/src/**/repo/
+
+### 本地笔记与验证目录 ###
+/AGENTS.md
+/agents/
+/run-probe/
+/temp/
