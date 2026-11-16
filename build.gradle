@@ -27,14 +27,25 @@ sourceSets.main.resources {
 }
 
 repositories {
-    exclusiveContent {
-        forRepository { maven { url = "https://api.modrinth.com/maven" } }
-        filter { includeGroup "maven.modrinth" }
+    maven {
+        name = "CurseForge"
+        url = "https://cursemaven.com"
+        content { includeGroup "curse.maven" }
+    }
+    maven {
+        name = "Curios"
+        url = "https://maven.theillusivec4.top/"
+        content { includeGroup "top.theillusivec4.curios" }
     }
     maven {
         name = "FirstDark snapshots"
         url = "https://maven.firstdark.dev/snapshots"
         content { includeGroupByRegex "com\\.lowdragmc(\\..*)?" }
+    }
+    maven {
+        name = "AnvilCraft"
+        url = "https://server.cjsah.net:1002/maven"
+        content { includeGroupByRegex "dev\\.(dubhe|anvilcraft)(\\..*)?" }
     }
     mavenCentral()
     // Add here additional repositories if required by some of the dependencies below.
@@ -85,6 +96,13 @@ neoForge {
             gameDirectory = file('run-server')
             programArgument '--nogui'
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        // 独立目录的验证服，避开 run/mods 里的客户端模组
+        serverProbe {
+            server()
+            programArgument '--nogui'
+            gameDirectory = project.file('run-probe')
         }
 
         // This run config launches GameTestServer and runs all registered gametests, then exits.
@@ -155,14 +173,28 @@ def modArtifact = { String pattern, String coordinate ->
     return files(matches)
 }
 
+// 本机 run/mods 已放着这几个可选依赖，优先用本地 jar，缺了才回落到 Maven 坐标。
+def runModsDir = file('run/mods')
+def installedArtifact = { String pattern, String coordinate ->
+    if (!runModsDir.isDirectory()) return coordinate
+    def matches = fileTree(dir: runModsDir, include: [pattern]).files
+    return matches.size() == 1 ? files(matches) : coordinate
+}
+
 dependencies {
-    implementation modArtifact('*anvilcraft-*.jar', "maven.modrinth:anvilcraft:${anvilcraft_version}")
+    // 官方 maven 的发布版把 anvillib 快照列成传递依赖却不上架，编译只需要本体。
+    def anvilcraft = modArtifact('*anvilcraft-*.jar', "dev.dubhe:anvilcraft-neoforge-${minecraft_version}:${anvilcraft_version}")
+    if (anvilcraft instanceof CharSequence) {
+        implementation(anvilcraft) { transitive = false }
+    } else {
+        implementation anvilcraft
+    }
     implementation modArtifact('ldlib2-*.jar', "com.lowdragmc.ldlib2:ldlib2-neoforge-${minecraft_version}:${ldlib2_version}:all")
     implementation modArtifact('Multiblocked2-*.jar', "com.lowdragmc.multiblocked2:Multiblocked2-1.21-${minecraft_version}:${mbd2_version}:all")
 
-    def curios = modArtifact('curios-*.jar', "maven.modrinth:curios:${curios_version}")
-    def golems = modArtifact('*modulargolems-*.jar', "maven.modrinth:modular-golems:${modulargolems_version}")
-    def l2 = modArtifact('l2library-*.jar', "maven.modrinth:l2library:${l2library_version}")
+    def curios = installedArtifact('curios-*.jar', "top.theillusivec4.curios:curios-neoforge:${curios_version}")
+    def golems = installedArtifact('*modulargolems-*.jar', "curse.maven:modulargolems-690937:9266670")
+    def l2 = installedArtifact('l2library-*.jar', "curse.maven:l2library-620203:9435203")
     compileOnly curios
     compileOnly golems
     compileOnly l2
