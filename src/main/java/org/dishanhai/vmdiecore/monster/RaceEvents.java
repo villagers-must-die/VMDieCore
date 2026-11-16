@@ -24,15 +24,15 @@ public final class RaceEvents {
         Race old=Race.of(p);
         if(old==r)return true;
         if(!force && old!=null){
-            if(!MonsterPerspective.RESELECT.get()){message(p,"种族已锁定，请联系管理员重置。");return false;}
+            if(!MonsterPerspective.RESELECT.get()){message(p,"monsterperspective.message.race_0");return false;}
             long remain=p.getPersistentData().getLong("mp_change_after")-p.serverLevel().getGameTime();
-            if(remain>0){message(p,"灵魂尚未稳定，请等待 "+((remain+19)/20)+" 秒。");return false;}
+            if(remain>0){message(p,"monsterperspective.message.race_1",(remain+19)/20);return false;}
         }
         if(!force && (!p.isAlive() || p.isPassenger()))return false;
         // Check the future body before committing, so changing under a low ceiling cannot trap the player.
         float w=r==Race.ARTHROPOD?1.4F:0.6F,h=r==Race.ENDERMAN?3F:r==Race.ARTHROPOD?1F:1.8F;
         if(!p.level().noCollision(p,EntityDimensions.scalable(w,h).makeBoundingBox(p.position()).deflate(0.01))){
-            message(p,"这里容不下新的身体，请前往宽敞处觉醒。");return false;
+            message(p,"monsterperspective.message.race_2");return false;
         }
         float fraction=p.getHealth()/p.getMaxHealth();
         p.getPersistentData().putString("mp_race",r.id());
@@ -42,10 +42,10 @@ public final class RaceEvents {
         if(old!=null && old.burns() && !r.burns())p.clearFire();
         p.refreshDimensions(); Network.sync(p);
         p.containerMenu.slotsChanged(p.getInventory());
-        message(p,"已觉醒为「"+r.title+"」，种族科技已解锁。");
+        message(p,"monsterperspective.message.race_3",Component.translatable(r.title));
         return true;
     }
-    public static void message(Player p,String text){p.displayClientMessage(Component.literal(text),true);}
+    public static void message(Player p,String key,Object... args){p.displayClientMessage(Component.translatable(key,args),true);}
     private static void modifier(Player p,net.minecraft.core.Holder<Attribute> attribute,String key,double amount,AttributeModifier.Operation op){
         AttributeInstance a=p.getAttribute(attribute); if(a==null)return;
         var id=MonsterPerspective.id(key); a.removeModifier(id);

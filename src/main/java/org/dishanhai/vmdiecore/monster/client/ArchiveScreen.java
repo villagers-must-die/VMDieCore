@@ -16,8 +16,8 @@ public final class ArchiveScreen extends Screen {
     private static final int BACK=0xFF171914,PANEL=0xFF22251D,LINE=0xFF484B3B;
     private static final int PAPER=0xFFD6CBB1,PAPER_LIGHT=0xFFE2D8C1,INK=0xFF38382B;
     private static final int WHITE=0xFFF0E9D8,MUTED=0xFFB8B6A2,AMBER=0xFFE6AA55,RUST=0xFFDB8771;
-    private static final String[] ROLE={"血肉重构","灵魂收容","空间转移","蛛丝制造","全族技术"};
-    private static final String[] WARNING={"日照会点燃身体；虚弱时切勿食用金苹果。","日照会点燃身体；生命上限低于其他种族。","注意三格净高；水与降雨都会造成伤害。","注意宽度；节肢杀手武器是你的弱点。","佩戴头部装备规避日照；装备会解除裸装隐形。"};
+    private static final String[] ROLE={"monsterperspective.ui.role.zombie","monsterperspective.ui.role.skeleton","monsterperspective.ui.role.enderman","monsterperspective.ui.role.arthropod","monsterperspective.ui.role.vampire"};
+    private static final String[] WARNING={"monsterperspective.ui.warning.zombie","monsterperspective.ui.warning.skeleton","monsterperspective.ui.warning.enderman","monsterperspective.ui.warning.arthropod","monsterperspective.ui.warning.vampire"};
     private static final int[][] RISKS={{1,2,3},{1,2,4},{1},{2},{1}};
     private Race selected=Race.ZOMBIE;
     private LivingEntity preview;
@@ -27,7 +27,7 @@ public final class ArchiveScreen extends Screen {
     private int left,top,pw,ph,raceY,raceW,raceH,bodyY,bodyBottom,heroW,detailX,detailW;
     private int contentY,contentBottom,contentHeight,buttonX,buttonY,buttonW,buttonH;
 
-    public ArchiveScreen(){super(Component.literal("永夜行动 · 作战身份"));}
+    public ArchiveScreen(){super(Component.translatable("monsterperspective.ui.title"));}
     @Override protected void init(){
         // Text has a lower scale bound. Small windows scroll instead of shrinking the entire briefing.
         uiScale=Mth.clamp(Math.min((width-16)/920F,(height-16)/540F),0.75F,1.1F);
@@ -45,6 +45,7 @@ public final class ArchiveScreen extends Screen {
         initialized=true;updatePreview();
     }
     private void updatePreview(){preview=selected.model==null?minecraft.player:selected.model.create(minecraft.level);scroll=0;confirm=false;}
+    private static String tr(String key){return Component.translatable(key).getString();}
     private static boolean hit(double x,double y,int bx,int by,int w,int h){return x>=bx && x<bx+w && y>=by && y<by+h;}
     private void text(GuiGraphics g,String s,float x,float y,float size,int color){
         g.pose().pushPose();g.pose().translate(x,y,0);g.pose().scale(size/9F,size/9F,1);g.drawString(font,s,0,0,color,false);g.pose().popPose();
@@ -77,9 +78,9 @@ public final class ArchiveScreen extends Screen {
         g.pose().pushPose();g.pose().scale(uiScale,uiScale,1);mx=(int)(mx/uiScale);my=(int)(my/uiScale);
         g.fill(left+5,top+6,left+pw+5,top+ph+6,0x77000000);g.fill(left,top,left+pw,top+ph,BACK);g.renderOutline(left,top,pw,ph,LINE);
         g.fill(left,top,left+5,top+(compact?38:51),AMBER);
-        if(!compact)text(g,"村民必须死  /  行前整备",left+18,top+12,12,MUTED);
-        text(g,"作战身份",left+18,top+(compact?13:30),compact?25:28,WHITE);
-        if(pw>690){right(g,"NOCTURNE  /  PERSONNEL",left+pw-52,top+15,12,MUTED);right(g,"确认身份，解锁你的生存方式",left+pw-52,top+35,13,AMBER);}
+        if(!compact)text(g,tr("monsterperspective.ui.header"),left+18,top+12,12,MUTED);
+        text(g,tr("monsterperspective.ui.identity"),left+18,top+(compact?13:30),compact?25:28,WHITE);
+        if(pw>690){right(g,tr("monsterperspective.ui.personnel"),left+pw-52,top+15,12,MUTED);right(g,tr("monsterperspective.ui.tagline"),left+pw-52,top+35,13,AMBER);}
         int closeX=left+pw-36,closeY=top+13;
         if(hit(mx,my,closeX,closeY,25,25))g.fill(closeX,closeY,closeX+25,closeY+25,LINE);text(g,"×",closeX+6,closeY+4,18,MUTED);
         for(Race r:Race.values()){
@@ -87,8 +88,8 @@ public final class ArchiveScreen extends Screen {
             cutPanel(g,x,raceY,raceW-5,raceH,active?AMBER:hover?0xFF3B4030:PANEL);
             int fg=active?INK:WHITE;
             if(!compact)text(g,String.format("0%d",r.ordinal()+1),x+10,raceY+15,12,active?0xFF64502F:MUTED);
-            float size=compact?14:17,tx=compact?x+(raceW-5-textWidth(r.title,size))/2:x+36;
-            text(g,r.title,tx,raceY+(compact?11:13),size,fg);
+            float size=compact?14:17,tx=compact?x+(raceW-5-textWidth(tr(r.title),size))/2:x+36;
+            text(g,tr(r.title),tx,raceY+(compact?11:13),size,fg);
             if(current()==r)g.fill(x+raceW-14,raceY+5,x+raceW-9,raceY+10,active?INK:AMBER);
             if(active)rule(g,x+8,raceY+raceH-4,raceW-21,INK);
         }
@@ -101,10 +102,10 @@ public final class ArchiveScreen extends Screen {
             int px=x+5+(i*71+13)%Math.max(1,w-10),py=bodyY+4+(i*43+7)%Math.max(1,h-8);g.fill(px,py,px+2+(i%8),py+1,0x0D55462F);
         }
         corner(g,x+8,bodyY+8,1,1,0xFF93846A);corner(g,x+w-9,bodyBottom-9,-1,-1,0xFF93846A);
-        text(g,"化身档案",x+16,bodyY+12,compact?12:13,INK);
-        if(!compact)right(g,String.format("ID / %02d",selected.ordinal()+1),x+w-16,bodyY+13,12,0xFF73684E);
-        int nameY=bodyY+(compact?32:39);text(g,selected.title,x+16,nameY,compact?22:30,INK);
-        if(!compact)text(g,ROLE[selected.ordinal()],x+17,nameY+38,14,0xFF75633E);
+        text(g,tr("monsterperspective.ui.dossier"),x+16,bodyY+12,compact?12:13,INK);
+        if(!compact)right(g,Component.translatable("monsterperspective.ui.record_number",String.format("%02d",selected.ordinal()+1)).getString(),x+w-16,bodyY+13,12,0xFF73684E);
+        int nameY=bodyY+(compact?32:39);text(g,tr(selected.title),x+16,nameY,compact?22:30,INK);
+        if(!compact)text(g,tr(ROLE[selected.ordinal()]),x+17,nameY+38,14,0xFF75633E);
         int floor=bodyBottom-(compact?25:53),ceiling=bodyY+(compact?61:99),cx=x+w/2,modelH=Math.max(25,floor-ceiling);
         g.fill(cx,ceiling+5,cx+1,floor,0x23756A50);
         for(int y=ceiling+8;y<floor;y+=20){g.fill(x+13,y,x+18,y+1,0x577E7157);g.fill(x+w-18,y,x+w-13,y+1,0x577E7157);}
@@ -116,19 +117,19 @@ public final class ArchiveScreen extends Screen {
             if(selected==Race.ARTHROPOD)scale=Math.min(scale,(int)((w-28)/2.8F));
             renderPreview(g,cx,floor-(int)((bodyHeight/2+0.06F)*scale),scale,mx,my);
         }
-        String caption=selected==Race.VAMPIRE?"玩家模型 · 保留你的皮肤":"原生怪物模型";
+        String caption=selected==Race.VAMPIRE?tr("monsterperspective.ui.player_caption"):tr("monsterperspective.ui.monster_caption");
         if(!compact){rule(g,x+16,bodyBottom-34,w-32,0xFFAB9C7F);text(g,caption,x+16,bodyBottom-24,12,INK);}
-        else text(g,selected==Race.VAMPIRE?"保留玩家皮肤":"实装化身",x+14,bodyBottom-17,12,INK);
+        else text(g,selected==Race.VAMPIRE?tr("monsterperspective.ui.player_caption_short"):tr("monsterperspective.ui.monster_caption_short"),x+14,bodyBottom-17,12,INK);
     }
     private void drawBriefing(GuiGraphics g,int mx,int my){
-        int x=detailX,w=detailW; text(g,selected.summary,x,bodyY+3,compact?15:19,AMBER);
+        int x=detailX,w=detailW; text(g,tr(selected.summary),x,bodyY+3,compact?15:19,AMBER);
         int tabY;
-        if(!compact){text(g,selected.story,x,bodyY+32,14,MUTED);tabY=bodyY+54;}else tabY=bodyY+30;
+        if(!compact){text(g,tr(selected.story),x,bodyY+32,14,MUTED);tabY=bodyY+54;}else tabY=bodyY+30;
         int tabH=compact?25:30,tw=(w-56)/2;
         for(int i=0;i<2;i++){
             int tx=x+i*(tw+8);boolean active=tab==i,hover=hit(mx,my,tx,tabY,tw,tabH);
             g.fill(tx,tabY,tx+tw,tabY+tabH,active?0xFF454B36:hover?0xFF34392C:PANEL);
-            text(g,i==0?"生存特性":"种族科技",tx+12,tabY+7,compact?13:15,active?WHITE:MUTED);
+            text(g,i==0?tr("monsterperspective.ui.traits_tab"):tr("monsterperspective.ui.technology_tab"),tx+12,tabY+7,compact?13:15,active?WHITE:MUTED);
             if(active)g.fill(tx,tabY+tabH-2,tx+tw,tabY+tabH,AMBER);
         }
         for(int i=0;i<2;i++){
@@ -143,7 +144,7 @@ public final class ArchiveScreen extends Screen {
         for(int i=0;i<lines.length;i++){
             boolean danger=tab==0 && risk(i);String label=danger?"!":String.format("%02d",i+1);
             text(g,label,x+2,y+2,danger?16:11,danger?RUST:0xFF9B9C7D);
-            var wrapped=font.split(Component.literal(lines[i]),Math.max(16,(int)(textW*9F/size)));
+            var wrapped=font.split(Component.translatable(lines[i]),Math.max(16,(int)(textW*9F/size)));
             for(var line:wrapped){text(g,line,textX,y,size,danger?0xFFE7BEA7:WHITE);y+=(int)lineH;}
             y+=compact?12:14;rule(g,textX,y-6,textW,0xFF303529);
         }
@@ -158,14 +159,14 @@ public final class ArchiveScreen extends Screen {
     private void drawFooter(GuiGraphics g,int mx,int my){
         int y=top+ph-(compact?49:62);rule(g,left+16,y,pw-32,LINE);
         Race current=current();int available=buttonX-(left+18)-16;
-        String status=current==null?"未登记身份":"当前身份 / "+current.title;text(g,status,left+18,y+10,compact?13:15,WHITE);
+        String status=current==null?tr("monsterperspective.ui.unregistered"):tr("monsterperspective.ui.current_identity")+tr(current.title);text(g,status,left+18,y+10,compact?13:15,WHITE);
         if(!compact){
-            String warning=WARNING[selected.ordinal()],fit=font.plainSubstrByWidth(warning,Math.max(10,(int)((available-18)*9F/12)));
+            String warning=tr(WARNING[selected.ordinal()]),fit=font.plainSubstrByWidth(warning,Math.max(10,(int)((available-18)*9F/12)));
             text(g,"!",left+18,y+35,13,AMBER);text(g,fit,left+34,y+35,12,MUTED);
         }
         boolean same=current==selected,hover=hit(mx,my,buttonX,buttonY,buttonW,buttonH);
         cutPanel(g,buttonX,buttonY,buttonW,buttonH,same?0xFF353C2B:hover?0xFFF0BE76:AMBER);
-        String label=same?"此身份已登记":confirm?"再次确认身份":"确认身份  →";float size=compact?14:17;
+        String label=same?tr("monsterperspective.ui.registered"):confirm?tr("monsterperspective.ui.confirm_again"):tr("monsterperspective.ui.confirm");float size=compact?14:17;
         text(g,label,buttonX+(buttonW-textWidth(label,size))/2,buttonY+(buttonH-size)/2+1,size,same?MUTED:INK);
     }
     private void renderPreview(GuiGraphics g,int cx,int cy,int scale,int mx,int my){

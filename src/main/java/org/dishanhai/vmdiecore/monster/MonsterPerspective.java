@@ -40,7 +40,7 @@ public final class MonsterPerspective {
         CHANGE_COOLDOWN=b.comment("Race change cooldown in seconds.").defineInRange("raceChangeCooldown", 60, 0, 3600);
         BONE_COOLDOWN=b.comment("Bone golem resurrection cooldown in seconds.").defineInRange("boneReviveCooldown",300,1,36000);
         SPEC=b.build();
-        TABS.register("archive", ()->CreativeModeTab.builder().title(net.minecraft.network.chat.Component.literal("永夜档案"))
+        TABS.register("archive", ()->CreativeModeTab.builder().title(net.minecraft.network.chat.Component.translatable("itemGroup.monsterperspective.archive"))
             .icon(()->FULL_SOUL.toStack()).displayItems((p,o)->ITEMS.getEntries().forEach(i->o.accept(i.get()))).build());
     }
     private MonsterPerspective() {}

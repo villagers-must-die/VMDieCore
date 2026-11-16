@@ -13,6 +13,8 @@ import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 
 public final class ClientEvents {
     private static final Map<UUID,LivingEntity> PROXIES=new HashMap<>();
+    private static final EquipmentSlot[] SPIDER_SLOTS={EquipmentSlot.HEAD,EquipmentSlot.CHEST,EquipmentSlot.LEGS,EquipmentSlot.FEET,EquipmentSlot.MAINHAND,EquipmentSlot.OFFHAND};
+    private static final float[][] SPIDER_EQUIPMENT_POSITIONS={{0,1.02F,-0.48F},{0,1.0F,0.05F},{-0.30F,0.75F,0.42F},{0.30F,0.75F,0.42F},{-0.72F,0.55F,-0.35F},{0.72F,0.55F,-0.35F}};
     public static void clear(){PROXIES.clear();}
     private static LivingEntity proxy(Player p,Race r){
         LivingEntity proxy=PROXIES.get(p.getUUID());
@@ -47,8 +49,25 @@ public final class ClientEvents {
         e.setCanceled(true);
         @SuppressWarnings("unchecked") EntityRenderer<LivingEntity> renderer=(EntityRenderer<LivingEntity>)(EntityRenderer<?>)mc.getEntityRenderDispatcher().getRenderer(proxy);
         renderer.render(proxy,e.getEntity().getYRot(),partial,e.getPoseStack(),e.getMultiBufferSource(),e.getPackedLight());
+        if(r==Race.ARTHROPOD)renderSpiderEquipment(p,e);
         var names=(org.dishanhai.vmdiecore.monster.mixin.EntityRendererInvoker)e.getRenderer();
         if(names.mp$showName(p))names.mp$nameTag(p,p.getDisplayName(),e.getPoseStack(),e.getMultiBufferSource(),e.getPackedLight(),partial);
+    }
+    // SpiderRenderer has no humanoid armor or held-item layers. Show the actual
+    // equipped item models on its body so other players can identify each slot.
+    private static void renderSpiderEquipment(Player player,RenderPlayerEvent.Pre event){
+        var pose=event.getPoseStack();
+        pose.pushPose();
+        pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(180-net.minecraft.util.Mth.rotLerp(event.getPartialTick(),player.yBodyRotO,player.yBodyRot)));
+        for(int i=0;i<SPIDER_SLOTS.length;i++){
+            var stack=player.getItemBySlot(SPIDER_SLOTS[i]);if(stack.isEmpty())continue;
+            pose.pushPose();pose.translate(SPIDER_EQUIPMENT_POSITIONS[i][0],SPIDER_EQUIPMENT_POSITIONS[i][1],SPIDER_EQUIPMENT_POSITIONS[i][2]);pose.scale(0.55F,0.55F,0.55F);
+            Minecraft.getInstance().getItemRenderer().renderStatic(player,stack,net.minecraft.world.item.ItemDisplayContext.FIXED,false,pose,
+                event.getMultiBufferSource(),player.level(),event.getPackedLight(),
+                net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY,player.getId()+i);
+            pose.popPose();
+        }
+        pose.popPose();
     }
     @SubscribeEvent public void hunger(RenderGuiLayerEvent.Pre e){
         if(e.getName().equals(net.minecraft.resources.ResourceLocation.withDefaultNamespace("food_level")) && Minecraft.getInstance().player!=null && Race.of(Minecraft.getInstance().player)==Race.SKELETON)e.setCanceled(true);

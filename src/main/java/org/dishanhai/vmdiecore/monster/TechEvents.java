@@ -40,7 +40,7 @@ public final class TechEvents {
             e.setCanceled(true);e.setCancellationResult(InteractionResult.SUCCESS);
         }else if(e.getHand()==InteractionHand.OFF_HAND && Race.hasTech(p,Race.ENDERMAN) && isKnife(stack)){
             if(!p.level().isClientSide && !p.getCooldowns().isOnCooldown(stack.getItem())){
-                if(p.getHealth()<=2){RaceEvents.message(p,"生命不足，无法割取珍珠。");}
+                if(p.getHealth()<=2){RaceEvents.message(p,"monsterperspective.message.tech_0");}
                 else if(p.hurt(p.damageSources().generic(),2)){RaceEvents.give(p,new ItemStack(Items.ENDER_PEARL));p.getCooldowns().addCooldown(stack.getItem(),20);}
             }
             e.setCanceled(true);e.setCancellationResult(InteractionResult.SUCCESS);
@@ -56,7 +56,7 @@ public final class TechEvents {
         if(!(victim instanceof Villager || victim instanceof AbstractIllager || victim instanceof Pig || victim instanceof Cow || victim instanceof Sheep))return;
         for(int i=0;i<p.getInventory().getContainerSize();i++){
             ItemStack s=p.getInventory().getItem(i);if(s.is(MonsterPerspective.SOUL_BOTTLE)){
-                s.shrink(1);RaceEvents.give(p,MonsterPerspective.FULL_SOUL.toStack());RaceEvents.message(p,"已捕获灵魂。");break;
+                s.shrink(1);RaceEvents.give(p,MonsterPerspective.FULL_SOUL.toStack());RaceEvents.message(p,"monsterperspective.message.tech_1");break;
             }
         }
     }

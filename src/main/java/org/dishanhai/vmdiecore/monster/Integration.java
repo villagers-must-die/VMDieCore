@@ -40,7 +40,7 @@ public final class Integration {
                     if(ent instanceof dev.xkmc.modulargolems.content.entity.common.AbstractGolemEntity<?,?> g
                         && g.isAlive() && p.getUUID().equals(g.getOwnerUUID()) && has(g,"flesh") && TechItem.safe(level,p,g.position(),g)){
                         var pos=g.position();g.discard();e.setCanceled(true);p.setHealth(p.getMaxHealth());p.clearFire();p.fallDistance=0;p.invulnerableTime=60;
-                        p.teleportTo(level,pos.x,pos.y,pos.z,p.getYRot(),p.getXRot());RaceEvents.message(p,"血肉重构完成，替身傀儡已消耗。");return true;
+                        p.teleportTo(level,pos.x,pos.y,pos.z,p.getYRot(),p.getXRot());RaceEvents.message(p,"monsterperspective.message.revive");return true;
                     }
                 }
             }
