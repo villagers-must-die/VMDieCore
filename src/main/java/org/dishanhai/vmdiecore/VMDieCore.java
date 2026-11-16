@@ -17,6 +17,9 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import org.dishanhai.vmdiecore.monster.MonsterPerspective;
 
 @Mod(VMDieCore.MOD_ID)
 public class VMDieCore {
@@ -25,9 +28,10 @@ public class VMDieCore {
     private static final BlockPos SPAWN = new BlockPos(0, 65, 0);
     private static final String PLAYER_INITIALIZED = "vmdiecore_initial_spawn";
 
-    public VMDieCore() {
+    public VMDieCore(IEventBus modBus, ModContainer container) {
         NeoForge.EVENT_BUS.addListener(VMDieCore::onPlayerLogin);
         NeoForge.EVENT_BUS.addListener(VMDieCore::onMobSpawn);
+        MonsterPerspective.initialize(modBus, container);
     }
 
     private static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
