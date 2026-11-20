@@ -25,6 +25,13 @@ Windows 下可双击 `gradlew.bat` 或 `build.bat` 构建，完成后按任意�
 
 默认构建会下载固定版本的依赖，无需依赖本机绝对路径。开发测试使用隔离的 `run-test/`、`run-client/` 目录，正式 JAR 不包含测试代码或第三方模组 JAR。
 
+### GitHub Actions
+
+提交或更新目标为 `main` 的 PR、推送到 `main` 时，GitHub 会用 JDK 21 自动构建。也可在
+[Actions](https://github.com/villagers-must-die/VMDieCore/actions) 手动运行 **Build VMDieCore**。
+构建成功后，在该次运行页面的 **Artifacts** 下载 `vmdiecore-jar`，解压后得到模组 JAR。
+构建产物保留 14 天，不会自动发布 Release。
+
 ## 怪物视角与种族科技
 
 按 **O** 或输入 `/monster` 打开作战身份界面。可选僵尸、骷髅、末影人、节肢生物、血族；血族保留玩家自身模型和皮肤。沿用大字号、军绿/沙色/警戒橙的搜打撤风格 UI。
