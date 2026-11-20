@@ -4,7 +4,8 @@
   "package": "org.dishanhai.vmdiecore.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ServerLevelsAccess"
+    "ServerLevelsAccess",
+    "MetalScaffoldingCollisionMixin"
   ],
   "injectors": {
     "defaultRequire": 1
