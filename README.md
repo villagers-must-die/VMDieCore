@@ -59,3 +59,15 @@ VMDieStacking.setLimit('minecraft:ender_pearl', 512)
 ```
 
 修改后重启游戏。多人游戏需要在服务端和客户端使用相同的启动脚本。带耐久组件的物品、带独立堆叠上限组件的物品栈以及低于原版通用上限的特殊槽位沿用各自的限制。降低或移除上限前，先拆分已有的大堆叠。容器类模组可能另有容量限制。
+
+## 金属脚手架碰撞
+
+在 Minecraft 1.21.1 / NeoForge 21.1.x 整合包中，VMDieCore 只为已由 KubeJS 注册的
+`kubejs:metal_scaffolding` 补充实体碰撞：从上方落下可站在顶面，从侧面或下方可穿入。
+保留整合包的 `minecraft:climbable` 标签、完整选中轮廓、`bottom` 外观状态和原放置脚本。
+请在客户端和服务端安装同一版 VMDieCore，不另装独立碰撞补丁。未安装 KubeJS 或未注册该方块时无效果。
+
+本功能不接管放置，因此不包含取消放置后的残影同步修复。
+要运行脚手架集成 GameTest，将 KubeJS NeoForge `2101.7.2-build.381` 和兼容的 Rhino
+JAR 放在同一目录，执行 `./gradlew runGameTestServer -PintegrationModsDir=/path/to/mods`。
+该测试使用隔离的 `run-test/` 脚本，不覆盖实际整合包。
